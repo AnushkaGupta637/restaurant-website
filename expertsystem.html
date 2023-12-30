@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Food Suggestion</title>
+  <style>
+    .weight
+    {
+        text-align: center;
+        font-size: 20px;
+    }
+    .height
+    {
+        text-align: center;
+        font-size: 20px;
+    }
+    .button
+    {
+        margin-left: 700px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2 style="text-align: center;"><u>BMI Food Suggestion</u></h2><br><br><br><br>
+<div class="weight">
+  <label for="weight"><b>Enter your weight in kilograms:&#160 &#160 </b></label>
+  <input type="number" id="weight" placeholder="Weight in kg">
+</div>
+  <br><br>
+<div class="height">
+  <label for="height"><b>Enter your height in centimeters:&#160 &#160 </b></label>
+  <input type="number" id="height" placeholder="Height in cm">
+</div>
+  <br><br><br>
+<div>
+  <button onclick="calculateBMI()" class="button" style="background-color: rgb(71, 179, 71); border-radius: 10px;" >Calculate BMI</button>
+</div>
+  <p id="result"></p>
+
+  <script>
+    function suggestFood(bmi) {
+      if (bmi < 18.5) {
+        return "Your BMI indicates that you are underweight. Consider adding more high-calorie and nutrient-dense foods to your diet, such as nuts, seeds, avocados, and lean proteins.";
+      } else if (bmi >= 18.5 && bmi < 24.9) {
+        return "Your BMI is in the normal range.Maintain a balanced diet with a variety of fruits, vegetables, whole grains, and lean proteins.";
+      } else if (bmi >= 25 && bmi < 29.9) {
+        return "Your BMI indicates that you are overweight. Focus on a balanced diet with portion control, and include more fruits, vegetables, and lean proteins. Consider incorporating regular exercise into your routine.";
+      } else {
+        return "Your BMI suggests obesity. Consult with a healthcare professional for personalized advice. Focus on a well-balanced diet, portion control, and regular exercise.";
+      }
+    }
+
+    function calculateBMI() {
+      var weight = parseFloat(document.getElementById("weight").value);
+      var height = parseFloat(document.getElementById("height").value);
+
+      if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+        alert("Please enter valid weight and height values.");
+        return;
+      }
+
+      var bmi = weight / ((height / 100) ** 2);
+      bmi = parseFloat(bmi.toFixed(2));
+
+      var resultElement = document.getElementById("result");
+      var foodSuggestion = suggestFood(bmi);
+
+      resultElement.innerHTML = `Your BMI is ${bmi}.<br> ${foodSuggestion}`;
+    }
+  </script>
+
+</body>
+</html>
